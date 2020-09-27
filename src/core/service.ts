@@ -1,5 +1,8 @@
-import { IBusinessServiceData } from "./data";
+import { IRequestData, IResponseData } from "./data";
 
-export interface IBusinessService<T extends IBusinessServiceData> {
-    execute(data: T): void;
+export interface IBusinessService {
+    
+    new (...args: any[]): any;
+
+    execute<T, U>(data: IResponseData<T>): IResponseData<U>;
 }
