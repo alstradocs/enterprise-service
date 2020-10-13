@@ -19,7 +19,7 @@
         "noEmit": true,
         "baseUrl": ".",
         "paths": {
-            "@alstradocs/event-service/*": [
+            "@alstradocs/business-service/*": [
                 "src/*"
             ]
         }

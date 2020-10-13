@@ -1,15 +1,9 @@
-import { BusinessServiceStore } from "./store";
-import { IBusinessService } from "./service";
-
+/**
+ * @deprecated
+ */
 export class BusinessServiceFactory {
+    static getInstance<T>(context: { [key: string]: any }, name: string, ...args: any[]): T {
 
-    /**
-     * 
-     * @param context 
-     * @param name 
-     * @param args 
-     */
-    static getInstance<T extends IBusinessService>(context: BusinessServiceStore, name: string, ...args: any[]): T {
         const classRef: { new(...args: any[]): any; } = context[name];
 
         if (!classRef) {

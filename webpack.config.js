@@ -8,7 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename:'[name].js',
         libraryTarget: 'umd',
-        library: 'AlstradocsEventService',
+        library: 'AlstradocsBusinessService',
         umdNamedDefine: true
     },
     resolve: {
