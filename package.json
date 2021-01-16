@@ -1,5 +1,5 @@
 {
-    "name": "@alstradocs/business-service",
+    "name": "@alstradocs/enterprise-service",
     "version": "1.0.0",
     "description": "",
     "main": "webpack.config.js",
@@ -11,35 +11,38 @@
         "dev": "webpack --mode development",
         "start": "webpack-dev-server --mode development",
         "build": "webpack --mode production  && npm pack",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/alstradocs-main/business-service.git"
+        "url": "git+https://github.com/alstradocs/enterprise-service.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/alstradocs-main/business-service/issues"
+        "url": "https://github.com/alstradocs/enterprise-service/issues"
     },
-    "homepage": "https://github.com/alstradocs-main/business-service#readme",
+    "homepage": "https://github.com/alstradocs/enterprise-service#readme",
     "devDependencies": {
+        "@types/jest": "^26.0.20",
         "awesome-typescript-loader": "^5.2.1",
         "copy-webpack-plugin": "^6.1.1",
         "css-loader": "^4.3.0",
         "file-loader": "^6.1.0",
         "html-webpack-plugin": "^4.5.0",
+        "jest": "^26.6.3",
         "mini-css-extract-plugin": "^0.11.2",
         "source-map-loader": "^1.1.0",
+        "ts-jest": "^26.4.4",
         "typescript": "^4.0.3",
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
-        "@alstradocs/event": "file:../event/alstradocs-event-1.0.7.tgz",
-        "@alstradocs/util": "file:../util/alstradocs-util-1.0.0.tgz",
+        "@alstradocs/event": "file:../enterprise-event/alstradocs-enterprise-event-1.0.7.tgz",
+        "@alstradocs/util": "file:../enterprise-util/alstradocs-enterprise-util-1.0.0.tgz",
         "redux": "^4.0.5",
         "tsyringe": "^4.3.0"
     }

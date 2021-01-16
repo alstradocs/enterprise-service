@@ -1,7 +1,7 @@
 /**
  * @deprecated
  */
-export class BusinessServiceFactory {
+export class ServiceFactory {
     static getInstance<T>(context: { [key: string]: any }, name: string, ...args: any[]): T {
 
         const classRef: { new(...args: any[]): any; } = context[name];
