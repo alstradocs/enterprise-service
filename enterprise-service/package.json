@@ -1,0 +1,5 @@
+{
+    "name": "@alstradocs/enterprise-service",
+    "private": true,
+    "main": "../dist/enterprise-service/index.js"
+  }

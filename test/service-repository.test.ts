@@ -1,4 +1,4 @@
-import * as service from "../src";
+import * as service from "../src/enterprise-service";
 
 export interface One { name: string };
 export interface Two { name: string};
@@ -7,6 +7,7 @@ class FormService extends service.AbstractService<One,Two> {
     doExecute(context: service.IServiceContext<One>): Two {
         return context.data;
     }
+    public static someStaticMethod() {}
 }
 
 const mockExecutor: service.IServiceExecutor = {

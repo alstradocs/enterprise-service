@@ -1,6 +1,5 @@
 /**
- * Represents the runtime environment 
- * of a service executor
+ * Represent service invocation information
  */
 export interface IExecutionContext<T> {
 
@@ -29,25 +28,14 @@ export interface IServiceExecutor {
 }
 
 /**
- * Represents the runtime environment 
- * of an executing service
+ * 
  */
-export interface IServiceContext<T> {
-
-    /**
-     * Service execution
-     */
-    data: T;
-
-    /**
-     * 
-     */
+export type IServiceContext<T> = Omit<IExecutionContext<T>, 'serviceName'> & {
     serviceExecutor: IServiceExecutor;
-}
+};
 
 /**
- * This defines the contract
- * of the instance of a service
+ * This defines the instance of a service
  */
 export interface IService<T, U> {
 
@@ -59,18 +47,28 @@ export interface IService<T, U> {
 }
 
 /**
+ * A type alias for IService<any, any> 
+ */
+export type IServiceInterface = IService<any, any> ;
+
+/**
  * Interface to enable us to
  * reference the stactic side
  * of a serivice
  */
-export interface IServiceConstructor<T> {
+export interface IServiceConstructor {
 
     /**
      * 
      */
-    new(...args: any[]): T;
-}
+    new(...args: any[]): IServiceInterface; 
 
+    /**
+     * Every service class has a static serviceName
+     */   
+    serviceName: string;
+
+}
 
 /**
  *  Business service repository
@@ -81,12 +79,12 @@ export interface IServiceRepository {
      * 
      * @param serviceName 
      */
-    get<T, U>(serviceName: string): IService<T, U>;
+    get(serviceName: string): IServiceInterface;
 
     /**
      * 
      * @param serviceName 
      * @param serviceConstructor 
      */
-    register<T>(serviceName: string, serviceConstructor: IServiceConstructor<T>): void;
+    register(serviceName: string, serviceConstructor: IServiceConstructor): void;
 }

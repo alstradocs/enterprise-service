@@ -1,12 +1,12 @@
 import { ServiceNotFoundException } from "./exceptions";
 import { 
     IService, IServiceExecutor, IServiceRepository, 
-    IServiceConstructor, IServiceContext, IExecutionContext} from "./model";
+    IServiceConstructor, IServiceContext, IExecutionContext, IServiceInterface} from "./model";
 
 /**
  * Abstract service
  */
-export abstract class AbstractService<T, U> implements IService<T, U>  {
+export abstract class AbstractService<T, U> implements IServiceInterface  {
 
     /**
      * 
@@ -37,8 +37,8 @@ export class ServiceExecutor implements IServiceExecutor {
      * @param context 
      */
     executeService<T, U>(context: IExecutionContext<T>): U {
-        let businessService: IService<T, U> = this.repository.get(context.serviceName);
-        let serviceContext: IServiceContext<T> = { data: context.data, serviceExecutor: this };
+        let businessService: IServiceInterface = this.repository.get(context.serviceName);
+        let serviceContext: IServiceContext<T> = { ...context, serviceExecutor: this };
         return businessService.execute(serviceContext);
     }
 }
@@ -53,15 +53,22 @@ export interface ServiceRepositoryEntry {
     /**
      * Reference to the static side of a service
      */
-    serviceContructor: IServiceConstructor<any>;
+    serviceContructor: IServiceConstructor;
 }
 
 export class ServiceRepository implements IServiceRepository {
 
-    private services: Map<string, IServiceConstructor<any>>;
+    /**
+     * 
+     */
+    private services: Map<string, IServiceConstructor>;
 
+    /**
+     * 
+     * @param entries 
+     */
     constructor(entries: ServiceRepositoryEntry[]) { 
-        this.services = new Map<string, IServiceConstructor<any>>();
+        this.services = new Map<string, IServiceConstructor>();
         // Register services
         entries.forEach(entry => {
             this.register(entry.serviceName, entry.serviceContructor)
@@ -72,10 +79,10 @@ export class ServiceRepository implements IServiceRepository {
      * 
      * @param serviceName 
      */
-    get<T, U>(serviceName: string): IService<T, U> {
+    get(serviceName: string): IServiceInterface {
         let serviceConstructor = this.services.get(serviceName);
         if(serviceConstructor) {
-            let service: IService<T, U> = new serviceConstructor({});
+            let service: IServiceInterface = new serviceConstructor({});
             return service;
 
         } else{ throw new ServiceNotFoundException('Service not found'); };
@@ -86,10 +93,7 @@ export class ServiceRepository implements IServiceRepository {
      * @param serviceName 
      * @param serviceClass 
      */
-    register<T>(serviceName: string, serviceConstructor: IServiceConstructor<T>): void {
+    register(serviceName: string, serviceConstructor: IServiceConstructor): void {
         this.services.set(serviceName, serviceConstructor);
     }
-    
-
-    
 }

@@ -19,11 +19,11 @@
         "noEmit": true,
         "baseUrl": ".",
         "paths": {
-            "@alstradocs/business-service/*": [
+            "@alstradocs/enterprise-service/*": [
                 "src/*"
             ]
         }
     },
-    "files": ["./src/index.ts"],
+    "files": ["src/enterprise-service/index.ts"],
     "include": ["./src/**/*.ts"]
 }

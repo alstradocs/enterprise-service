@@ -1,24 +1,28 @@
-import { AbstractService, IExecutionContext, IService, IServiceContext, IServiceExecutor } from "../src";
+import * as service from "../src/enterprise-service";
+import { Service } from "../src/enterprise-service";
 
 export interface One { name: string };
 export interface Two { name: string};
 
-class FormService extends AbstractService<One,Two> {
-    doExecute(context: IServiceContext<One>): Two {
+@Service()
+class FormService extends service.AbstractService<One,Two> {
+    doExecute(context: service.IServiceContext<One>): Two {
         return context.data;
-    }
+    }    
+    public static serviceName: string = 'BgInitService';
+
 }
 
-const mockExecutor: IServiceExecutor = {
-    executeService(context: IExecutionContext<any>): any {
+const mockExecutor: service.IServiceExecutor = {
+    executeService(context: service.IExecutionContext<any>): any {
         return context.data;
     }
 }
 
 describe('Test FormService Class', () => {
     let serviceRequestData: One;
-    let serviceInstance: IService<One, Two>;
-    let serviceContext: IServiceContext<One>;
+    let serviceInstance: service.IService<One, Two>;
+    let serviceContext: service.IServiceContext<One>;
 
     /**
      * 

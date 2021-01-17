@@ -2,10 +2,11 @@
     "name": "@alstradocs/enterprise-service",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "files": [
-        "dist"
+        "dist",
+        "enterprise-service"
     ],
     "scripts": {
         "dev": "webpack --mode development",
@@ -41,9 +42,5 @@
         "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
-        "@alstradocs/event": "file:../enterprise-event/alstradocs-enterprise-event-1.0.7.tgz",
-        "@alstradocs/util": "file:../enterprise-util/alstradocs-enterprise-util-1.0.0.tgz",
-        "redux": "^4.0.5",
-        "tsyringe": "^4.3.0"
     }
 }
