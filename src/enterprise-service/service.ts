@@ -1,29 +1,14 @@
 import { ServiceNotFoundException } from "./exceptions";
+import { IsServiceExecutor, IsServiceRepository } from "./decorators";
 import { 
-    IService, IServiceExecutor, IServiceRepository, 
-    IServiceConstructor, IServiceContext, IExecutionContext, IServiceInterface} from "./model";
+    IServiceRepository, IServiceConstructor, IServiceContext, 
+    IExecutionContext, IServiceInterface, ServiceRepositoryEntry}  from "./model";
 
 /**
- * Abstract service
+ * 
  */
-export abstract class AbstractService<T, U> implements IServiceInterface  {
-
-    /**
-     * 
-     * @param data 
-     */
-    execute(context: IServiceContext<T>): any {
-        return this.doExecute(context);
-    }
-
-    /**
-     * 
-     * @param data 
-     */
-    abstract doExecute(context: IServiceContext<T>): U ;
-}
-
-export class ServiceExecutor implements IServiceExecutor {
+@IsServiceExecutor()
+export class ServiceExecutor {
     
     /**
      * 
@@ -43,20 +28,11 @@ export class ServiceExecutor implements IServiceExecutor {
     }
 }
 
-export interface ServiceRepositoryEntry {
-
-    /**
-     * Service name
-     */
-    serviceName: string;
-
-    /**
-     * Reference to the static side of a service
-     */
-    serviceContructor: IServiceConstructor;
-}
-
-export class ServiceRepository implements IServiceRepository {
+/**
+ * 
+ */
+@IsServiceRepository()
+export class ServiceRepository {
 
     /**
      * 
@@ -85,7 +61,7 @@ export class ServiceRepository implements IServiceRepository {
             let service: IServiceInterface = new serviceConstructor({});
             return service;
 
-        } else{ throw new ServiceNotFoundException('Service not found'); };
+        } else { throw new ServiceNotFoundException('Service not found'); };
     }
 
     /**

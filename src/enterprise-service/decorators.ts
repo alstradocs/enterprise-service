@@ -1,10 +1,23 @@
-import { IServiceConstructor } from "./model";
+import { IServiceConstructor, IServiceExecutorConstructor, IServiceRepositoryConstructor } from "./model";
 
 /**
  * 
  */
-export function Service() {
+export function IsService() {
     return <U extends IServiceConstructor>(constructor: U) => { constructor };
+}
+/**
+ * 
+ */
+export function IsServiceExecutor() {
+    return <U extends IServiceExecutorConstructor>(constructor: U) => { constructor };
+}
+
+/**
+ * 
+ */
+export function IsServiceRepository() {
+    return <U extends IServiceRepositoryConstructor>(constructor: U) => { constructor };
 }
 
 /* class decorator to implement given type*/

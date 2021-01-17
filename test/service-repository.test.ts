@@ -1,13 +1,15 @@
 import * as service from "../src/enterprise-service";
+import { IsService } from "../src/enterprise-service";
 
 export interface One { name: string };
 export interface Two { name: string};
 
-class FormService extends service.AbstractService<One,Two> {
-    doExecute(context: service.IServiceContext<One>): Two {
+@IsService()
+class FormService {
+    execute(context: service.IServiceContext<One>): Two {
         return context.data;
     }
-    public static someStaticMethod() {}
+    public static serviceName = 'FormService';
 }
 
 const mockExecutor: service.IServiceExecutor = {
@@ -45,9 +47,7 @@ describe('Test ServiceRepository Class', () => {
     it('Should find a service from the repository', () => {
         // Retrieve and execute service
         let serviceInstance = repository.get('formService');
-        let isServiceInstance = serviceInstance instanceof service.AbstractService;
-        // Expect the request and response data to be the same
-        expect(isServiceInstance).toBe(true);
+        expect(serviceInstance).toBeTruthy();
     });
 
     /**

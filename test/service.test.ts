@@ -1,12 +1,12 @@
 import * as service from "../src/enterprise-service";
-import { Service } from "../src/enterprise-service";
+import { IsService } from "../src/enterprise-service";
 
 export interface One { name: string };
 export interface Two { name: string};
 
-@Service()
-class FormService extends service.AbstractService<One,Two> {
-    doExecute(context: service.IServiceContext<One>): Two {
+@IsService()
+class FormService {
+    execute(context: service.IServiceContext<One>): Two {
         return context.data;
     }    
     public static serviceName: string = 'BgInitService';

@@ -15,7 +15,7 @@ export interface IExecutionContext<T> {
 }
 
 /**
- * Initializes and executes services
+ * Instance side of a service executor
  */
 export interface IServiceExecutor {
 
@@ -25,6 +25,18 @@ export interface IServiceExecutor {
      * @param context service lookup and data parameters
      */
     executeService<T, U>(context: IExecutionContext<T>): U
+}
+
+/**
+ * Constructor interface for IServiceExecutor
+ * Static side of a service executor
+ */
+export interface IServiceExecutorConstructor {
+
+    /**
+     * 
+     */
+    new(...args: any[]): IServiceExecutor; 
 }
 
 /**
@@ -67,11 +79,10 @@ export interface IServiceConstructor {
      * Every service class has a static serviceName
      */   
     serviceName: string;
-
 }
 
 /**
- *  Business service repository
+ *  Service repository
  */
 export interface IServiceRepository {
 
@@ -87,4 +98,34 @@ export interface IServiceRepository {
      * @param serviceConstructor 
      */
     register(serviceName: string, serviceConstructor: IServiceConstructor): void;
+}
+
+/**
+ * Constructor interface for IServiceRepository
+ * Static side of a service respository
+ */
+export interface IServiceRepositoryConstructor {
+
+    /**
+     * 
+     */
+    new(...args: any[]): IServiceRepository; 
+}
+
+
+/**
+ * Utility interface to describe
+ * a service repository entry
+ */
+export interface ServiceRepositoryEntry {
+
+    /**
+     * Service name
+     */
+    serviceName: string;
+
+    /**
+     * Reference to the static side of a service
+     */
+    serviceContructor: IServiceConstructor;
 }
