@@ -5,6 +5,8 @@
 <!-- [![Build Status][travis-image]][travis-url] -->
 [![Downloads Stats][npm-downloads]][npm-url]
 
+![](header.png)
+
 A service is a user defined class that implements the IService interface.
 
 ```typescript
@@ -43,7 +45,6 @@ export interface IServiceRepository {
     register(serviceName: string, serviceConstructor: IServiceConstructor): void;
 }
 ```
-![](header.png)
 
 ## Installation
 
