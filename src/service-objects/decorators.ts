@@ -1,4 +1,4 @@
-import { IServiceConstructor, IServiceExecutorConstructor, IServiceRepositoryConstructor } from "./model";
+import { IServiceConstructor, IServiceExecutorConstructor, IServiceRepositoryConstructor } from "./objects";
 
 /**
  * 

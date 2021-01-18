@@ -1,5 +1,5 @@
-import * as service from "../src/enterprise-service";
-import { IsService } from "../src/enterprise-service";
+import * as service from "../src/service-objects";
+import { IsService } from "../src/service-objects";
 
 export interface One { name: string };
 export interface Two { name: string };

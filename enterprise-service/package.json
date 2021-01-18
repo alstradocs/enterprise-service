@@ -1,5 +1,5 @@
 {
-    "name": "@alstradocs/enterprise-service",
+    "name": "@alstradocs/service-objects",
     "private": true,
-    "main": "../dist/enterprise-service/index.js"
+    "main": "../dist/service-objects/index.js"
   }

@@ -1,12 +1,12 @@
 {
-    "name": "@alstradocs/enterprise-service",
+    "name": "@alstradocs/service-objects",
     "version": "1.0.0",
     "description": "",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "files": [
         "dist",
-        "enterprise-service"
+        "service-objects"
     ],
     "scripts": {
         "dev": "webpack --mode development",
@@ -16,15 +16,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/alstradocs/enterprise-service.git"
+        "url": "git+https://github.com/alstradocs/service-objects.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/alstradocs/enterprise-service/issues"
+        "url": "https://github.com/alstradocs/service-objects/issues"
     },
-    "homepage": "https://github.com/alstradocs/enterprise-service#readme",
+    "homepage": "https://github.com/alstradocs/service-objects#readme",
     "devDependencies": {
         "@types/jest": "^26.0.20",
         "awesome-typescript-loader": "^5.2.1",

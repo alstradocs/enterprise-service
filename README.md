@@ -1,4 +1,4 @@
-# Alstradocs Enterprise Service
+# Service Objects
 > A small TypeScript library for defining, looking up and executing user defined service objects.
 
 [![NPM Version][npm-image]][npm-url]
@@ -33,6 +33,8 @@ export interface IServiceConstructor {
 This library defines an API for creating, storing, looking up and executing services. This is achieved with the help of service executors, service repositories and decorators.
 
 ```typescript
+import { IExecutionContext, IServiceInterface, IServiceConstructor } from "@alstradocs/service-objects";
+
 export interface IServiceExecutor {
 
     executeService<T, U>(context: IExecutionContext<T>): U
@@ -51,7 +53,7 @@ export interface IServiceRepository {
 NPM:
 
 ```sh
-npm install @alstradocs/enterprise-service --save
+npm install @alstradocs/service-objects --save
 ```
 
 ## Usage example
@@ -59,7 +61,7 @@ npm install @alstradocs/enterprise-service --save
 First you need a service. You can simply annotate a class with the @IsService decorator.
 
 ```typescript
-import { IsService, IServiceContext } from "@alstradocs/enterprise-service";
+import { IsService, IServiceContext } from "@alstradocs/service-objects";
 
 interface BinaryOperands {
     firstOperand: number;
@@ -79,7 +81,7 @@ class AdditionService {
 ```
 Next you add your shining new service to an instance of IServiceRepository. Yes, you guessed it. It's a service datasource. You can use the default repository 
 ```typescript
-import { ServiceRepository } from "@alstradocs/enterprise-service";
+import { ServiceRepository } from "@alstradocs/service-objects";
 
 // Initialize service repo with just a single service ...
 let serviceInfo = { 
@@ -94,7 +96,7 @@ repository.register(AdditionService.serviceName, AdditionService);
 Or you can implement your own repository 
 
 ```typescript
-import { IsServiceRepository } from "@alstradocs/enterprise-service";
+import { IsServiceRepository } from "@alstradocs/service-objects";
 
 @IsServiceRepository()
 export class MyServiceRepository {
@@ -117,7 +119,7 @@ the name of a service and its required params to executor. You can use the defau
 executor.
 
 ```typescript
-import { ServiceRepository } from "@alstradocs/enterprise-service";
+import { ServiceRepository } from "@alstradocs/service-objects";
 
 let repository = // initialize repo
 // instantiate executor with given repo
@@ -127,7 +129,7 @@ serviceExecutor.executeService(context);
 Or you can implement your own executor 
 
 ```typescript
-import { IsServiceExecutor } from "@alstradocs/enterprise-service";
+import { IsServiceExecutor } from "@alstradocs/service-objects";
 
 @IsServiceExecutor()
 export class MyServiceExecutor {
@@ -140,8 +142,7 @@ export class MyServiceExecutor {
 let serviceExecutor = new MyServiceExecutor();
 serviceExecutor.executeService(context);
 ```
-Typically all the setup above (apart from the serviceExecutor.executeService(context) line) will be
-done once during app/script inititialization. You can then store the executor app/script wide and
+Typically all the setup above (apart from the `serviceExecutor.executeService(context) line`) will be done once during app/script inititialization. You can then store the executor app/script wide and
 make it available to execute services as needed.
 
 _For more examples and usage, please refer to the source code._
@@ -158,12 +159,12 @@ Edward Banfa – [@EdwardBanfa](https://twitter.com/edwardbanfa) – ebanfa@gmai
 
 Distributed under the Apache license. See ``LICENSE`` for more information.
 
-[https://github.com/alstradocs/enterprise-service](https://github.com/alstradocs/)
+[https://github.com/alstradocs/service-objects](https://github.com/alstradocs/)
 
 ## Readme Image
 <a href='https://pngtree.com/so/robot-clipart'>robot clipart png from pngtree.com</a>
 <!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/@alstradocs/enterprise-service
-[npm-url]: https://npmjs.org/package/@alstradocs/enterprise-service
-[npm-downloads]: https://img.shields.io/npm/dw/@alstradocs/enterprise-service
+[npm-image]: https://img.shields.io/npm/v/@alstradocs/service-objects
+[npm-url]: https://npmjs.org/package/@alstradocs/service-objects
+[npm-downloads]: https://img.shields.io/npm/dw/@alstradocs/service-objects
 [wiki]: https://github.com/yourname/yourproject/wiki

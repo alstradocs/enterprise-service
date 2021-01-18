@@ -2,7 +2,7 @@ import { ServiceNotFoundException } from "./exceptions";
 import { IsServiceExecutor, IsServiceRepository } from "./decorators";
 import { 
     IServiceRepository, IServiceConstructor, IServiceContext, 
-    IExecutionContext, IServiceInterface, ServiceRepositoryEntry}  from "./model";
+    IExecutionContext, IServiceInterface, ServiceRepositoryEntry}  from "./objects";
 
 /**
  * 
