@@ -58,6 +58,7 @@ npm install @alstradocs/service-objects --save
 
 ## Usage example
 
+### 1. Define Services
 First you need a service. You can simply annotate a class with the @IsService decorator.
 
 ```typescript
@@ -79,7 +80,8 @@ class AdditionService {
     }
 }
 ```
-Next you add your shining new service to an instance of IServiceRepository. Yes, you guessed it. It's a service datasource. You can use the default repository 
+### 2. Instantiate/Define Service Repository 
+Next you add your shining new service to an instance of IServiceRepository. A service repository is just a fancy name for a service store. You can use the default repository 
 ```typescript
 import { ServiceRepository } from "@alstradocs/service-objects";
 
@@ -96,7 +98,7 @@ repository.register(AdditionService.serviceName, AdditionService);
 Or you can implement your own repository 
 
 ```typescript
-import { IsServiceRepository } from "@alstradocs/service-objects";
+import { IsServiceRepository, IServiceConstructor } from "@alstradocs/service-objects";
 
 @IsServiceRepository()
 export class MyServiceRepository {
@@ -114,9 +116,8 @@ let repository = new MyServiceRepository();
 repository.register(AdditionService.serviceName, AdditionService);
 ```
 
-Finally to execute your service, you need an instance of IServiceExecutor. You pass 
-the name of a service and its required params to executor. You can use the default
-executor.
+### 3. Define/Instanstiate A Service Execcutor
+To execute your service, you need an instance of IServiceExecutor. The service executor is a object that knows how to find and execute services. It uses the service repository for this. You can use the default executor.
 
 ```typescript
 import { ServiceRepository } from "@alstradocs/service-objects";
@@ -124,12 +125,11 @@ import { ServiceRepository } from "@alstradocs/service-objects";
 let repository = // initialize repo
 // instantiate executor with given repo
 let serviceExecutor = new ServiceExecutor(repository);
-serviceExecutor.executeService(context);
 ```
 Or you can implement your own executor 
 
 ```typescript
-import { IsServiceExecutor } from "@alstradocs/service-objects";
+import { IsServiceExecutor, IExecutionContext } from "@alstradocs/service-objects";
 
 @IsServiceExecutor()
 export class MyServiceExecutor {
@@ -140,9 +140,14 @@ export class MyServiceExecutor {
 }
 // ... instantiate and execute (context contains all info required to execute a service)
 let serviceExecutor = new MyServiceExecutor();
+```
+### 4. Execute Service
+The final step is executing the service.
+```typescript
 serviceExecutor.executeService(context);
 ```
-Typically all the setup above (apart from the `serviceExecutor.executeService(context) line`) will be done once during app/script inititialization. You can then store the executor app/script wide and
+
+Typically all the entire setup above (apart from step 4) will be done once before or during app/script inititialization. You can then store the executor app/script wide and
 make it available to execute services as needed.
 
 _For more examples and usage, please refer to the source code._
