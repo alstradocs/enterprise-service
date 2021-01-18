@@ -30,7 +30,7 @@ export interface IServiceConstructor {
     serviceName: string;
 }
 ```
-This library defines an API for creating, storing, looking up and executing services. This is acheived the help of service executors, service repositories and decorators.
+This library defines an API for creating, storing, looking up and executing services. This is achieved with the help of service executors, service repositories and decorators.
 
 ```typescript
 export interface IServiceExecutor {
@@ -59,7 +59,7 @@ npm install @alstradocs/enterprise-service --save
 First you need a service. You can simply annotate a class with the @IsService decorator.
 
 ```typescript
-import { IsService } from "@alstradocs/enterprise-service";
+import { IsService, IServiceContext } from "@alstradocs/enterprise-service";
 
 interface BinaryOperands {
     firstOperand: number;
@@ -71,7 +71,7 @@ class AdditionService {
 
     public static serviceName = 'AdditionService';
 
-    execute(context: service.IServiceContext<BinaryOperands>): number {
+    execute(context: IServiceContext<BinaryOperands>): number {
         let { firstOperand, secondOperand } = context.data;
         return firstOperand + secondOperand;
     }
